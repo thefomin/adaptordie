@@ -4,6 +4,7 @@ import { RouterProvider } from 'react-router-dom'
 
 import { enableMocking } from '@/shared/api/mocks'
 
+import './index.css'
 import { router } from './router'
 
 enableMocking().then(() => {
