@@ -1,0 +1,48 @@
+schemas:
+  Course:
+    type: object
+    properties:
+      id: { type: string }
+      title: { type: string }
+      description: { type: string }
+      cost_time: { type: integer }
+      reward_knowledge: { type: integer }
+
+  CourseWithLessons:
+    allOf:
+      - $ref: '#/schemas/Course'
+      - type: object
+        properties:
+          lessons:
+            type: array
+            items:
+              $ref: './lessons.yaml#/schemas/Lesson'
+
+getAllCourses:
+  summary: Список курсов
+  tags: [Courses]
+  responses:
+    '200':
+      description: Массив курсов
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/schemas/Course'
+
+getCourseById:
+  summary: Получить курс с уроками
+  tags: [Courses]
+  parameters:
+    - in: path
+      name: courseId
+      required: true
+      schema: { type: string }
+  responses:
+    '200':
+      description: Курс
+      content:
+        application/json:
+          schema:
+            $ref: '#/schemas/CourseWithLessons'

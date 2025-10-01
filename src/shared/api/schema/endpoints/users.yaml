@@ -1,0 +1,23 @@
+getMe:
+  summary: Профиль текущего пользователя
+  tags: [Users]
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: Данные пользователя
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              email:
+                type: string
+              time:
+                type: integer
+              knowledge:
+                type: integer
+              rank:
+                type: string

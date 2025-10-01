@@ -1,0 +1,53 @@
+schemas:
+  Lesson:
+    type: object
+    properties:
+      id: { type: string }
+      courseId: { type: string }
+      title: { type: string }
+      type:
+        type: string
+        enum: [text, video]
+      content: { type: string }
+      videoUrl: { type: string }
+      cost_time: { type: integer }
+      reward_knowledge: { type: integer }
+
+getLesson:
+  summary: Получить урок
+  tags: [Lessons]
+  parameters:
+    - in: path
+      name: lessonId
+      required: true
+      schema: { type: string }
+  responses:
+    '200':
+      description: Урок
+      content:
+        application/json:
+          schema:
+            $ref: '#/schemas/Lesson'
+
+completeLesson:
+  summary: Завершить урок
+  tags: [Lessons]
+  security:
+    - bearerAuth: []
+  parameters:
+    - in: path
+      name: lessonId
+      required: true
+      schema: { type: string }
+  responses:
+    '200':
+      description: Урок завершен, опыт начислен
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success: { type: boolean }
+              knowledgeReward: { type: integer }
+              totalKnowledge: { type: integer }
+              rank: { type: string }

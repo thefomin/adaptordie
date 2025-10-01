@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: adaptordie API
+  version: 1.0.0
+  description: >
+    Образовательная платформа с игровыми механиками:
+    - текстовые и видео уроки
+    - начисление опыта знаний
+    - система рангов
+    - ограниченное время (ресурс)
+
+servers:
+  - url: http://localhost:3000/api
+
+tags:
+  - name: Auth
+  - name: Users
+  - name: Courses
+  - name: Lessons
+  - name: Progress
+  - name: Cron
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths:
+  /auth/register:
+    post:
+      $ref: "./endpoints/auth.yaml#/register"
+
+  /auth/login:
+    post:
+      $ref: "./endpoints/auth.yaml#/login"
+
+  /auth/refresh:
+    post:
+      $ref: "./endpoints/auth.yaml#/refresh"
+
+  /users/me:
+    get:
+      $ref: "./endpoints/users.yaml#/getMe"
+
+  /courses:
+    get:
+      $ref: "./endpoints/courses.yaml#/getAllCourses"
+
+  /courses/{courseId}:
+    get:
+      $ref: "./endpoints/courses.yaml#/getCourseById"
+
+  /lessons/{lessonId}:
+    get:
+      $ref: "./endpoints/lessons.yaml#/getLesson"
+
+  /lessons/{lessonId}/complete:
+    post:
+      $ref: "./endpoints/lessons.yaml#/completeLesson"
+
+  /progress:
+    get:
+      $ref: "./endpoints/progress.yaml#/getProgress"
+
+  /cron/daily:
+    post:
+      $ref: "./endpoints/cron.yaml#/dailyJob"

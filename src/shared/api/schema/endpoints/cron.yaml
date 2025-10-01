@@ -1,0 +1,12 @@
+dailyJob:
+  summary: Списание времени за бездействие
+  tags: [Cron]
+  responses:
+    '200':
+      description: Обновление пользователей
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              updatedUsers: { type: integer }
