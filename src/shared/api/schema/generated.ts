@@ -415,6 +415,11 @@ export interface components {
             id: string;
             /** Format: email */
             email: string;
+            time?: number;
+            knowledge?: number;
+            rank?: string;
+            /** Format: date-time */
+            lastActive?: string;
         };
         AuthResponse: {
             accessToken: string;
