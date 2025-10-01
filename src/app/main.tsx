@@ -1,9 +1,15 @@
-import { StrictMode } from "react"
-import { createRoot } from "react-dom/client"
-import App from "./app"
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { RouterProvider } from 'react-router-dom'
 
-createRoot(document.getElementById("root")!).render(
-	<StrictMode>
-		<App />
-	</StrictMode>
-)
+import { enableMocking } from '@/shared/api/mocks'
+
+import { router } from './router'
+
+enableMocking().then(() => {
+	createRoot(document.getElementById('root')!).render(
+		<StrictMode>
+			<RouterProvider router={router} />
+		</StrictMode>
+	)
+})
