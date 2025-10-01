@@ -23,10 +23,7 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": {
-                        email: string;
-                        password: string;
-                    };
+                    "application/json": components["schemas"]["RegisterRequest"];
                 };
             };
             responses: {
@@ -67,10 +64,7 @@ export interface paths {
             };
             requestBody: {
                 content: {
-                    "application/json": {
-                        email: string;
-                        password: string;
-                    };
+                    "application/json": components["schemas"]["LoginRequest"];
                 };
             };
             responses: {
@@ -411,6 +405,12 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        RegisterRequest: {
+            /** Format: email */
+            email: string;
+            /** Format: password */
+            password: string;
+        };
         User: {
             id: string;
             /** Format: email */
@@ -428,6 +428,12 @@ export interface components {
         Error: {
             message: string;
             code: string;
+        };
+        LoginRequest: {
+            /** Format: email */
+            email: string;
+            /** Format: password */
+            password: string;
         };
         Course: {
             id?: string;

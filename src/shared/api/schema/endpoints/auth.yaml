@@ -1,7 +1,9 @@
 schemas:
     User:
         type: object
-        required: [id, email]
+        required:
+            - id
+            - email
         properties:
             id:
                 type: string
@@ -17,6 +19,32 @@ schemas:
             lastActive:
                 type: string
                 format: date-time
+
+    RegisterRequest:
+        type: object
+        required:
+            - email
+            - password
+        properties:
+            email:
+                type: string
+                format: email
+            password:
+                type: string
+                format: password
+
+    LoginRequest:
+        type: object
+        required:
+            - email
+            - password
+        properties:
+            email:
+                type: string
+                format: email
+            password:
+                type: string
+                format: password
 
     AuthResponse:
         type: object
@@ -37,13 +65,7 @@ register:
         content:
             application/json:
                 schema:
-                    type: object
-                    required: [email, password]
-                    properties:
-                        email:
-                            type: string
-                        password:
-                            type: string
+                    $ref: '#/schemas/RegisterRequest'
     responses:
         '201':
             description: Успешная регистрация
@@ -62,13 +84,7 @@ login:
         content:
             application/json:
                 schema:
-                    type: object
-                    required: [email, password]
-                    properties:
-                        email:
-                            type: string
-                        password:
-                            type: string
+                    $ref: '#/schemas/LoginRequest'
     responses:
         '200':
             description: Успешный вход
