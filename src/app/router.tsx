@@ -34,7 +34,11 @@ export const router = createBrowserRouter([
 
 			{
 				path: ROUTES.REGISTER,
-				lazy: () => import('@/features/auth/register/register.page')
+				lazy: () => import('@/features/auth/pages/register.page')
+			},
+			{
+				path: ROUTES.LOGIN,
+				lazy: () => import('@/features/auth/pages/login.page')
 			},
 			{
 				path: ROUTES.HOME,

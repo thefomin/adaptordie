@@ -1,5 +1,5 @@
 function RegisterPage() {
-	return <></>
+	return <>register</>
 }
 
 export const Component = RegisterPage
