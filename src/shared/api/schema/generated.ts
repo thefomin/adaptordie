@@ -196,7 +196,31 @@ export interface paths {
             };
         };
         put?: never;
-        post?: never;
+        /** Создать новый курс */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateCourse"];
+                };
+            };
+            responses: {
+                /** @description Успешное создание */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CourseWithLessons"];
+                    };
+                };
+            };
+        };
         delete?: never;
         options?: never;
         head?: never;
@@ -233,9 +257,55 @@ export interface paths {
                 };
             };
         };
-        put?: never;
+        /** Обновить курс */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    courseId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateCourse"];
+                };
+            };
+            responses: {
+                /** @description Обновленный курс */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CourseWithLessons"];
+                    };
+                };
+            };
+        };
         post?: never;
-        delete?: never;
+        /** Удалить курс */
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    courseId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Курс успешно удален */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -436,10 +506,15 @@ export interface components {
             password: string;
         };
         Course: {
+            /** @example uuid */
             id?: string;
+            /** @example Основы программирования */
             title?: string;
+            /** @example Изучите основы программирования с нуля */
             description?: string;
+            /** @example 1200 */
             cost_time?: number;
+            /** @example 15 */
             reward_knowledge?: number;
         };
         Lesson: {
@@ -453,7 +528,21 @@ export interface components {
             cost_time?: number;
             reward_knowledge?: number;
         };
+        CreateCourse: {
+            title: string;
+            description: string;
+            cost_time: number;
+            reward_knowledge: number;
+            lessons?: components["schemas"]["Lesson"][];
+        };
         CourseWithLessons: components["schemas"]["Course"] & {
+            lessons?: components["schemas"]["Lesson"][];
+        };
+        UpdateCourse: {
+            title?: string;
+            description?: string;
+            cost_time?: number;
+            reward_knowledge?: number;
             lessons?: components["schemas"]["Lesson"][];
         };
     };
