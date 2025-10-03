@@ -47,10 +47,16 @@ paths:
   /courses:
     get:
       $ref: "./endpoints/courses.yaml#/getAllCourses"
+    post:
+      $ref: "./endpoints/courses.yaml#/createCourse"
 
   /courses/{courseId}:
     get:
       $ref: "./endpoints/courses.yaml#/getCourseById"
+    put:
+      $ref: "./endpoints/courses.yaml#/updateCourse"
+    delete:
+      $ref: "./endpoints/courses.yaml#/deleteCourse"
 
   /lessons/{lessonId}:
     get:
